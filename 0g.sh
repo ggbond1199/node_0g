@@ -110,7 +110,7 @@ function install_node() {
     # 配置端口
     node_address="tcp://localhost:13457"
     sed -i -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:13458\"%; s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://127.0.0.1:13457\"%; s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:13460\"%; s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:13456\"%; s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":13466\"%" $HOME/.0gchain/config/config.toml
-    sed -i -e "s%^address = \"tcp://localhost:1317\"%address = \"tcp://0.0.0.0:13417\"%; s%^address = \":8080\"%address = \":13480\"%; s%^address = \"localhost:9090\"%address = \"0.0.0.0:13490\"%; s%^address = \"localhost:9091\"%address = \"0.0.0.0:13491\"%; s%:8545%:13445%; s%:8546%:13446%; s%:6065%:13465%" $HOME/.0gchain/config/app.toml
+    sed -i -e "s%^address = \"tcp://localhost:1317\"%address = \"tcp://0.0.0.0:13417\"%; s%^address = \":8080\"%address = \":13480\"%; s%^address = \"0.0.0.0:9090\"%address = \"0.0.0.0:13490\"%; s%^address = \"localhost:9091\"%address = \"0.0.0.0:13491\"%; s%:8545%:13445%; s%:8546%:13446%; s%:6065%:13465%" $HOME/.0gchain/config/app.toml
     echo "export OG_RPC_PORT=$node_address" >> $HOME/.bash_profile
     source $HOME/.bash_profile
     # 使用 PM2 启动节点进程
@@ -182,7 +182,7 @@ function add_validator() {
 
 read -p "请输入您的钱包名称: " wallet_name
 read -p "请输入您想设置的验证者的名字: " validator_name
-read -p "请输入您的验证者详情（例如'bondnode'）: " details
+read -p "请输入您的验证者详情（例如'吊毛资本'）: " details
 
 
 0gchaind tx staking create-validator \
@@ -233,7 +233,7 @@ cd run
 read -p "请输入你想导入的EVM钱包私钥，不要有0x: " minerkey
 
 sed -i "s/miner_key = \"\"/miner_key = \"$minerkey\"/" config.toml
-sed -i 's|blockchain_rpc_endpoint = "https://rpc-testnet.0g.ai"|blockchain_rpc_endpoint = "https://evm-rpc-0gchain.dadunode.com"|g' config.toml
+sed -i 's|blockchain_rpc_endpoint = "https://rpc-testnet.0g.ai"|blockchain_rpc_endpoint = "https://jsonrpc.oneiricts.com:8445"|g' config.toml
 sed -i 's/log_sync_start_block_number = 80981/log_sync_start_block_number = 223989/' config.toml
 
 
